@@ -50,7 +50,7 @@ CREATE TABLE attendance_tbl (
 );
 
 -- fees
-cCREATE TABLE fees_tbl (
+CREATE TABLE fees_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fees INT,
     student_id INT,

@@ -114,7 +114,7 @@
         <Component class="javax.swing.JButton" name="btnBatch">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="0" type="rgb"/>
+              <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -199,7 +199,7 @@
         <Component class="javax.swing.JButton" name="btnFees">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="33" type="rgb"/>
+              <Color blue="ff" green="ff" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -282,9 +282,9 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="0">
                     <Column editable="true" title="Id" type="java.lang.Object"/>
-                    <Column editable="true" title="Batch" type="java.lang.Object"/>
-                    <Column editable="true" title="Batch Time" type="java.lang.Object"/>
-                    <Column editable="true" title="Duration" type="java.lang.Object"/>
+                    <Column editable="true" title="Fees" type="java.lang.Object"/>
+                    <Column editable="true" title="Student Id" type="java.lang.Object"/>
+                    <Column editable="true" title="Student Name" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -320,7 +320,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnAddBatch">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Batch"/>
+            <Property name="text" type="java.lang.String" value="Add Fees"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddBatchActionPerformed"/>

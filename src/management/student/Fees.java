@@ -19,19 +19,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tanu Singh
  */
-public class Batch extends javax.swing.JFrame {
+public class Fees extends javax.swing.JFrame {
     
     Connection con;
     PreparedStatement pat;
     ResultSet rs;
     
-    public Batch() {
+    public Fees() {
         initComponents();
-        this.getData("select * from batch_tbl ");
+        this.getData(" select fees_tbl.*,student_tbl.name from fees_tbl INNER JOIN student_tbl on fees_tbl.student_id=student_tbl.id ");
 
 //            to find count of batch_tbl
 //            pat = con.prepareStatement("select count(*) from batch_tbl ");
     }
+    
+    
     
     public void getData(String query) {
 //        tableModel.setRowCount(0);
@@ -62,12 +64,12 @@ public class Batch extends javax.swing.JFrame {
             
             while (rs.next()) {
                 String id = String.valueOf(rs.getInt("id"));
-                String name = rs.getString("name");
-                String time = rs.getString("time");
-                String duration = rs.getString("duration");
+                String fees = rs.getString("fees");
+                String student_id = rs.getString("student_id");
+                String student_name = rs.getString("name");
 
 //                String array for store data into table
-                String tbData[] = {id, name, time, duration};
+                String tbData[] = {id,fees, student_id, student_name};
                 DefaultTableModel tableModel = (DefaultTableModel) batchTable.getModel();
 
 //                add string array data into jtable
@@ -76,9 +78,9 @@ public class Batch extends javax.swing.JFrame {
             }
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Fees.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Fees.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -114,7 +116,7 @@ public class Batch extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\women\\Downloads\\project_dash_logo.png")); // NOI18N
 
-        btnBatch.setBackground(new java.awt.Color(0, 255, 255));
+        btnBatch.setBackground(new java.awt.Color(51, 51, 51));
         btnBatch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBatch.setForeground(new java.awt.Color(255, 255, 255));
         btnBatch.setText("Batch");
@@ -164,7 +166,7 @@ public class Batch extends javax.swing.JFrame {
             }
         });
 
-        btnFees.setBackground(new java.awt.Color(51, 51, 51));
+        btnFees.setBackground(new java.awt.Color(0, 255, 255));
         btnFees.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnFees.setForeground(new java.awt.Color(255, 255, 255));
         btnFees.setText("Fees");
@@ -232,12 +234,12 @@ public class Batch extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Batch", "Batch Time", "Duration"
+                "Id", "Fees", "Student Id", "Student Name"
             }
         ));
         jScrollPane1.setViewportView(batchTable);
 
-        btnAddBatch.setText("Add Batch");
+        btnAddBatch.setText("Add Fees");
         btnAddBatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddBatchActionPerformed(evt);
@@ -319,12 +321,15 @@ public class Batch extends javax.swing.JFrame {
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
+        Batch b=new Batch();
+        b.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_btnBatchActionPerformed
 
     private void btnAddBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBatchActionPerformed
         // TODO add your handling code here:
-        AddBatch addBatch = new AddBatch();
-        addBatch.setVisible(true);
+        AddFees add= new AddFees();
+        add.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnAddBatchActionPerformed
 
@@ -367,14 +372,22 @@ public class Batch extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Batch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Batch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Batch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Batch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -387,7 +400,7 @@ public class Batch extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Batch().setVisible(true);
+                new Fees().setVisible(true);
             }
         });
     }

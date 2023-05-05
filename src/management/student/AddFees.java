@@ -27,6 +27,30 @@ public class AddFees extends javax.swing.JFrame {
      */
     public AddFees() {
         initComponents();
+        this.getStudentName();
+
+    }
+    
+    
+     public void getStudentName() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
+            pat = con.prepareStatement("select id from student_tbl");
+
+            rs = pat.executeQuery();
+
+            txtStudentId.removeAllItems();
+
+            while (rs.next()) {
+                txtStudentId.addItem(rs.getString("id"));
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -53,6 +77,8 @@ public class AddFees extends javax.swing.JFrame {
         txtFees = new javax.swing.JTextField();
         cancelFees = new javax.swing.JButton();
         AddFees = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtStudentId = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -79,6 +105,10 @@ public class AddFees extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Student_Id");
+
+        txtStudentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,16 +116,25 @@ public class AddFees extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
+                        .addGap(231, 231, 231)
                         .addComponent(AddFees, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelFees, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel2)
-                        .addGap(58, 58, 58)
-                        .addComponent(txtFees, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(187, 187, 187)
+                                .addComponent(jLabel2)
+                                .addGap(46, 46, 46))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFees, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,11 +143,15 @@ public class AddFees extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFees, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(99, 99, 99)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelFees, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddFees, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(127, 127, 127))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,6 +179,7 @@ public class AddFees extends javax.swing.JFrame {
 
     private void AddFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFeesActionPerformed
         String fees = txtFees.getText();
+        String studentId=txtStudentId.getSelectedItem().toString();
         try {
 
             if (fees.isEmpty()) {
@@ -145,11 +189,12 @@ public class AddFees extends javax.swing.JFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
-            pat = con.prepareStatement("insert into fees_tbl(fees) values(?)");
+            pat = con.prepareStatement("insert into fees_tbl(fees,student_id) values(?,?)");
             System.out.print(pat);
 
 //             The setString method is used to set the value of a parameter in a prepared statement when the parameter is a string data type
             pat.setString(1, fees);
+            pat.setString(2, studentId);
 
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "fees added.....");
@@ -271,8 +316,10 @@ public class AddFees extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddFees;
     private javax.swing.JButton cancelFees;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtFees;
+    private javax.swing.JComboBox<String> txtStudentId;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,21 +20,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Tanu Singh
  */
 public class Attendance extends javax.swing.JFrame {
-    
+
     Connection con;
     PreparedStatement pat;
     ResultSet rs;
-    
+
     public Attendance() {
         initComponents();
-        this.getData("select * from attendance_tbl ");
+        this.getData("select attendance_tbl.*,student_tbl.name from  attendance_tbl inner join student_tbl on student_tbl.id=attendance_tbl.id; ");
     }
-    
+
     public void getData(String query) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
-            
+
             if (query == "btn") {
                 if (rs.next()) {
                     DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
@@ -43,39 +43,46 @@ public class Attendance extends javax.swing.JFrame {
                     if (rs.getInt(1) == Integer.parseInt(String.valueOf(arr.lastElement().elementAt(0)))) {
                         return;
                     }
-                    
-                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4)};
+
+                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5)};
                     tableModel.addRow(tbData);
                     return;
                 }
             }
-            
+
             pat = con.prepareStatement(query);
-            
+
             rs = pat.executeQuery();
             System.out.println(rs);
-            
+
             while (rs.next()) {
                 String id = String.valueOf(rs.getInt("id"));
-                String attend = String.valueOf(rs.getBoolean("is_attend"));
+
+                boolean Isattend = (rs.getBoolean("is_attend"));
+                String attend = "Present";
+                if (Isattend == true) {
+                    attend = "Absent";
+                }
+
                 String date = rs.getString("a_date");
-                String studentId= rs.getString("student_id");
+                String studentId = rs.getString("student_id");
+                String name = rs.getString("name");
 
 //                String array for store data into table
-                String tbData[] = {id, attend,date,studentId};
+                String tbData[] = {id, attend, date, studentId, name};
                 DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
 
 //                add string array data into jtable
                 tableModel.addRow(tbData);
-                
+
             }
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -228,7 +235,7 @@ public class Attendance extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "is_attend", "date", "student_id"
+                "Id", "is_attend", "date", "student_id", "student_name"
             }
         ));
         jScrollPane1.setViewportView(attendanceTable);
@@ -311,7 +318,7 @@ public class Attendance extends javax.swing.JFrame {
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnAttendanceActionPerformed
@@ -325,15 +332,15 @@ public class Attendance extends javax.swing.JFrame {
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
-        Batch b=new Batch();
+        Batch b = new Batch();
         b.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnBatchActionPerformed
 
     private void bttnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnAttendanceActionPerformed
         // TODO add your handling code here:
-       AddAttendance ad=new AddAttendance();
-       ad.setVisible(true);
+        AddAttendance ad = new AddAttendance();
+        ad.setVisible(true);
         this.hide();
     }//GEN-LAST:event_bttnAttendanceActionPerformed
 
@@ -341,15 +348,15 @@ public class Attendance extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
 //         batchTable.repaint();
-            pat = con.prepareStatement("select * from attendance_tbl ORDER BY id DESC LIMIT 1");
+            pat = con.prepareStatement("select attendance_tbl.*,student_tbl.name from  attendance_tbl inner join student_tbl on student_tbl.id=attendance_tbl.id ORDER BY id DESC LIMIT 1");
 //this.getData("select * from batch_tbl ORDER BY id DESC LIMIT 1");
             rs = pat.executeQuery();
-            
+
             this.getData("btn");
         } catch (SQLException ex) {
             Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_btnRefreshActionPerformed
 
@@ -362,14 +369,14 @@ public class Attendance extends javax.swing.JFrame {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        Report a=new Report();
+        Report a = new Report();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DashBoard d=new DashBoard();
+        DashBoard d = new DashBoard();
         d.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

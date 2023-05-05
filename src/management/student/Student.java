@@ -24,7 +24,7 @@ public class Student extends javax.swing.JFrame {
 
     public Student() {
         initComponents();
-        this.getData("select * from student_tbl");
+        this.getData("select student_tbl.id,student_tbl.name,student_tbl.email,student_tbl.mobile,student_tbl.dob,fathers_name,address,batch_tbl.name,course_tbl.name from student_tbl inner join batch_tbl on student_tbl.batch_id=batch_tbl.id INNER JOIN COURSE_TBL ON STUDENT_TBL.COURSE_ID=COURSE_TBL.ID;");
 
     }
 
@@ -35,20 +35,6 @@ public class Student extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
 
-            if (query == "btn") {
-                if (rs.next()) {
-                    DefaultTableModel tableModel = (DefaultTableModel) tblStudent.getModel();
-//                    getting table as array
-                    var arr = tableModel.getDataVector();
-                    if (rs.getInt(1) == Integer.parseInt(String.valueOf(arr.lastElement().elementAt(0)))) {
-                        return;
-                    }
-
-                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)};
-                    tableModel.addRow(tbData);
-                    return;
-                }
-            }
 
             pat = con.prepareStatement(query);
 
@@ -56,18 +42,18 @@ public class Student extends javax.swing.JFrame {
             System.out.println(rs);
 
             while (rs.next()) {
-                String id = String.valueOf(rs.getInt("id"));
-                String batchId = rs.getString("batch_id");
-                String courseId = rs.getString("course_id");
-                String name = rs.getString("name");
-                String mobile = rs.getString("mobile");
-                String email = rs.getString("email");
-                String dob = rs.getString("dob");
-                String fathers_name = rs.getString("fathers_name");
+                String id = String.valueOf(rs.getInt("student_tbl.id"));
+                String name = rs.getString("student_tbl.name");
+                String email = rs.getString("student_tbl.email");
+                String mobile= rs.getString("student_tbl.mobile");
+                String dob = rs.getString("student_tbl.dob");
+                String fathersname = rs.getString("fathers_name");
                 String address = rs.getString("address");
+                String batch_name = rs.getString("batch_tbl.name");
+                String course = rs.getString("course_tbl.name");
 
 //                String array for store data into table
-                String tbData[] = {id,batchId,courseId,name,mobile,email,dob,fathers_name,address};
+                String tbData[] = {id,name,email,mobile,dob,fathersname,address,batch_name,course};
                 DefaultTableModel tableModel = (DefaultTableModel)tblStudent.getModel();
 
 //                add string array data into jtable
@@ -100,7 +86,6 @@ public class Student extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStudent = new javax.swing.JTable();
         btnAddCourse = new javax.swing.JButton();
-        btnRefresh = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -229,22 +214,15 @@ public class Student extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "batch_id", "course_id", "name ", "mobile", "email", "dob", "fathers_name", "address"
+                "id", "name", "email", "mobile", "dob", "fathers name", "adress", "batch name", "couse name"
             }
         ));
         jScrollPane1.setViewportView(tblStudent);
 
-        btnAddCourse.setText("ADD COURSE");
+        btnAddCourse.setText("ADD STUDENT");
         btnAddCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddCourseActionPerformed(evt);
-            }
-        });
-
-        btnRefresh.setText("REFRESH");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
             }
         });
 
@@ -254,16 +232,12 @@ public class Student extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,9 +246,7 @@ public class Student extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAddCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAddCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33))
@@ -309,19 +281,6 @@ public class Student extends javax.swing.JFrame {
         this.hide();
 
     }//GEN-LAST:event_btnAddCourseActionPerformed
-
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
-        try {
-            pat = con.prepareStatement("select * from student_tbl ORDER BY id DESC LIMIT 1");
-            rs = pat.executeQuery();
-
-            this.getData("btn");
-        } catch (SQLException ex) {
-            Logger.getLogger(Fees.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -407,7 +366,6 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JButton btnBatch;
     private javax.swing.JButton btnCourse;
     private javax.swing.JButton btnFees;
-    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton jButton1;

@@ -145,7 +145,7 @@ public class AddFees extends javax.swing.JFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
-            pat = con.prepareStatement("insert into fees_tbl (fees) values(?)");
+            pat = con.prepareStatement("insert into fees_tbl(fees) values(?)");
             System.out.print(pat);
 
 //             The setString method is used to set the value of a parameter in a prepared statement when the parameter is a string data type
@@ -167,6 +167,7 @@ public class AddFees extends javax.swing.JFrame {
 
     private void cancelFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFeesActionPerformed
         // TODO add your handling code here:
+        this.hide();
     }//GEN-LAST:event_cancelFeesActionPerformed
 
     /**

@@ -89,7 +89,6 @@ public class Course extends javax.swing.JFrame {
         btnFees = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        courseRefresh = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
 
@@ -220,13 +219,6 @@ public class Course extends javax.swing.JFrame {
             }
         });
 
-        courseRefresh.setText("Refresh");
-        courseRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courseRefreshActionPerformed(evt);
-            }
-        });
-
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -246,8 +238,6 @@ public class Course extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(courseRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
@@ -261,9 +251,7 @@ public class Course extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(courseRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -301,23 +289,6 @@ public class Course extends javax.swing.JFrame {
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void courseRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseRefreshActionPerformed
-        // TODO add your handling code here:
-        
-         try {
-            // TODO add your handling code here:
-//         batchTable.repaint();
-            pat = con.prepareStatement("select * from course_tbl ORDER BY id DESC LIMIT 1");
-//this.getData("select * from batch_tbl ORDER BY id DESC LIMIT 1");
-            rs = pat.executeQuery();
-
-
-//            this.getData("btn");
-        } catch (SQLException ex) {
-            Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_courseRefreshActionPerformed
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
@@ -451,7 +422,6 @@ public class Course extends javax.swing.JFrame {
     private javax.swing.JButton btnFees;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnStudent;
-    private javax.swing.JButton courseRefresh;
     private javax.swing.JTable courseTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

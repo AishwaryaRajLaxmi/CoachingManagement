@@ -100,12 +100,13 @@ public class AddStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
+        setUndecorated(true);
 
         jLabel3.setText("Name");
 
-        jLabel4.setText("Batch Id");
+        jLabel4.setText("Batch Name");
 
-        jLabel5.setText("Course Id");
+        jLabel5.setText("Course Name");
 
         jLabel6.setText("Mobile");
 

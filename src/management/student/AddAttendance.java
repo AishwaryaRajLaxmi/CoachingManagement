@@ -227,6 +227,8 @@ public class AddAttendance extends javax.swing.JFrame {
             pat.setBoolean(1, isAttend);
             pat.setString(2, date);
             pat.setString(3, student);
+            
+            System.out.println("helo"+isAttend+""+date+""+student);
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Attendance has been taken.....");
             this.setVisible(false);

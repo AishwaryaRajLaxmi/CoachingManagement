@@ -33,8 +33,6 @@ public class Fees extends javax.swing.JFrame {
 //            pat = con.prepareStatement("select count(*) from batch_tbl ");
     }
     
-    
-    
     public void getData(String query) {
 //        tableModel.setRowCount(0);
 
@@ -44,7 +42,7 @@ public class Fees extends javax.swing.JFrame {
             
             if (query == "btn") {
                 if (rs.next()) {
-                    DefaultTableModel tableModel = (DefaultTableModel) batchTable.getModel();
+                    DefaultTableModel tableModel = (DefaultTableModel) feesTable.getModel();
 //                    getting table as array
                     var arr = tableModel.getDataVector();
                     if (rs.getInt(1) == Integer.parseInt(String.valueOf(arr.lastElement().elementAt(0)))) {
@@ -69,8 +67,8 @@ public class Fees extends javax.swing.JFrame {
                 String student_name = rs.getString("name");
 
 //                String array for store data into table
-                String tbData[] = {id,fees, student_id, student_name};
-                DefaultTableModel tableModel = (DefaultTableModel) batchTable.getModel();
+                String tbData[] = {id, fees, student_id, student_name};
+                DefaultTableModel tableModel = (DefaultTableModel) feesTable.getModel();
 
 //                add string array data into jtable
                 tableModel.addRow(tbData);
@@ -105,7 +103,7 @@ public class Fees extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        batchTable = new javax.swing.JTable();
+        feesTable = new javax.swing.JTable();
         btnAddBatch = new javax.swing.JButton();
         btnSearch = new javax.swing.JTextField();
 
@@ -215,10 +213,10 @@ public class Fees extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBatch)
-                .addGap(18, 18, 18)
-                .addComponent(btnCourse)
+                .addComponent(btnBatch, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(btnFees, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,10 +224,10 @@ public class Fees extends javax.swing.JFrame {
                 .addComponent(btnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        batchTable.setModel(new javax.swing.table.DefaultTableModel(
+        feesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -237,7 +235,12 @@ public class Fees extends javax.swing.JFrame {
                 "Id", "Fees", "Student Id", "Student Name"
             }
         ));
-        jScrollPane1.setViewportView(batchTable);
+        feesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feesTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(feesTable);
 
         btnAddBatch.setText("Add Fees");
         btnAddBatch.addActionListener(new java.awt.event.ActionListener() {
@@ -255,25 +258,23 @@ public class Fees extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddBatch, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addComponent(btnAddBatch, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddBatch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -307,7 +308,7 @@ public class Fees extends javax.swing.JFrame {
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnAttendanceActionPerformed
@@ -321,16 +322,16 @@ public class Fees extends javax.swing.JFrame {
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
-        Batch b=new Batch();
+        Batch b = new Batch();
         b.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnBatchActionPerformed
 
     private void btnAddBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBatchActionPerformed
         // TODO add your handling code here:
-        AddFees add= new AddFees();
+        AddFees add = new AddFees();
         add.setVisible(true);
-        this.hide();
+        
     }//GEN-LAST:event_btnAddBatchActionPerformed
 
     private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
@@ -342,18 +343,34 @@ public class Fees extends javax.swing.JFrame {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DashBoard d=new DashBoard();
+        DashBoard d = new DashBoard();
         d.setVisible(true);
         this.hide();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void feesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feesTableMouseClicked
+        // TODO add your handling code here:
+        
+        DefaultTableModel tblModel = (DefaultTableModel) feesTable.getModel();
+
+        // set data to text feild where row is selected
+        String row_idString = tblModel.getValueAt(feesTable.getSelectedRow(), 0).toString();
+        int row_id = Integer.parseInt(row_idString);
+        
+        ModifyFees m = new ModifyFees();
+        m.setFeesId(row_id);
+        m.setVisible(true);
+        this.hide();
+        
+    }//GEN-LAST:event_feesTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -406,7 +423,6 @@ public class Fees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable batchTable;
     private javax.swing.JButton btnAddBatch;
     private javax.swing.JButton btnAttendance;
     private javax.swing.JButton btnBatch;
@@ -415,6 +431,7 @@ public class Fees extends javax.swing.JFrame {
     private javax.swing.JButton btnReport;
     private javax.swing.JTextField btnSearch;
     private javax.swing.JButton btnStudent;
+    private javax.swing.JTable feesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

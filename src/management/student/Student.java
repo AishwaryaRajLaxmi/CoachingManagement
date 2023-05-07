@@ -7,15 +7,15 @@ package management.student;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+/**
+ *
+ * @author Tanu Singh
+ */
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Tanu Singh
- */
 public class Student extends javax.swing.JFrame {
 
     Connection con;
@@ -25,9 +25,11 @@ public class Student extends javax.swing.JFrame {
     public Student() {
         initComponents();
         this.getData("select student_tbl.id,student_tbl.name,student_tbl.email,student_tbl.mobile,student_tbl.dob,fathers_name,address,batch_tbl.name,course_tbl.name from student_tbl inner join batch_tbl on student_tbl.batch_id=batch_tbl.id INNER JOIN COURSE_TBL ON STUDENT_TBL.COURSE_ID=COURSE_TBL.ID;");
-
+        
     }
 
+    
+  
     public void getData(String query) {
 //        tableModel.setRowCount(0);
 
@@ -91,6 +93,7 @@ public class Student extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
+        setUndecorated(true);
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -217,6 +220,11 @@ public class Student extends javax.swing.JFrame {
                 "id", "name", "email", "mobile", "dob", "fathers name", "adress", "batch name", "couse name"
             }
         ));
+        tblStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblStudentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblStudent);
 
         btnAddCourse.setText("ADD STUDENT");
@@ -284,7 +292,7 @@ public class Student extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Student std=new Student();
+        DashBoard std=new DashBoard();
         std.setVisible(true);
         this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -309,6 +317,26 @@ public class Student extends javax.swing.JFrame {
         r.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnReportActionPerformed
+
+    private void tblStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStudentMouseClicked
+        // TODO add your handling code here:
+        
+        
+        
+        DefaultTableModel tblModel = (DefaultTableModel) tblStudent.getModel();
+
+        // set data to text feild where row is selected and getting first index of selected row
+        String row_idString = tblModel.getValueAt(tblStudent.getSelectedRow(), 0).toString();
+        int row_id = Integer.parseInt(row_idString);
+        
+        ModifyStudent m = new ModifyStudent();
+        m.setStudentId(row_id);
+        m.setVisible(true);
+        this.hide();
+        
+        
+        
+    }//GEN-LAST:event_tblStudentMouseClicked
 
     /**
      * @param args the command line arguments

@@ -56,7 +56,6 @@ public class Course extends javax.swing.JFrame {
             while (rs.next()) {
                 String id = String.valueOf(rs.getInt("id"));
                 String name = rs.getString("name");
-             
 
 //                String array for store data into table
                 String tbData[] = {id, name};
@@ -227,6 +226,11 @@ public class Course extends javax.swing.JFrame {
                 "Id", "Name"
             }
         ));
+        courseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                courseTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(courseTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,23 +268,23 @@ public class Course extends javax.swing.JFrame {
 
     private void btnFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeesActionPerformed
         // TODO add your handling code here:
-        Fees f=new Fees();
+        Fees f = new Fees();
         f.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_btnFeesActionPerformed
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_btnAttendanceActionPerformed
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         // TODO add your handling code here:
-        Student s=new Student();
+        Student s = new Student();
         s.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_btnStudentActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -292,30 +296,46 @@ public class Course extends javax.swing.JFrame {
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
-        Batch b=new Batch();
+        Batch b = new Batch();
         b.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_btnBatchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DashBoard d=new DashBoard();
+        DashBoard d = new DashBoard();
         d.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        Report r=new Report();
+        Report r = new Report();
         r.setVisible(true);
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
         // TODO add your handling code here:
-        Course c=new Course();
+        Course c = new Course();
         c.setVisible(true);
-        this.hide();
+//        this.hide();
     }//GEN-LAST:event_btnCourseActionPerformed
+
+    private void courseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseTableMouseClicked
+        // TODO add your handling code here:
+
+        DefaultTableModel tblModel = (DefaultTableModel) courseTable.getModel();
+
+        // set data to text feild where row is selected
+        String table_idString = tblModel.getValueAt(courseTable.getSelectedRow(), 0).toString();
+        int table_id = Integer.parseInt(table_idString);
+
+//        passing id as parameter to ModifyBAtch form
+        ModifyCourse m = new ModifyCourse();
+        m.setCourseId(table_id);
+        m.setVisible(true);
+        this.hide();
+    }//GEN-LAST:event_courseTableMouseClicked
 
     /**
      * @param args the command line arguments

@@ -111,6 +111,7 @@ public class AddCourse extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateCourseActionPerformed
@@ -150,6 +151,8 @@ public class AddCourse extends javax.swing.JFrame {
     private void CancelCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelCourseActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        AddFees a=new AddFees();
+        a.setVisible(true);
     }//GEN-LAST:event_CancelCourseActionPerformed
 
     /**

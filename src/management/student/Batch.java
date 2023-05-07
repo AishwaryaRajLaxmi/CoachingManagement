@@ -20,11 +20,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Tanu Singh
  */
 public class Batch extends javax.swing.JFrame {
-    
+
     Connection con;
     PreparedStatement pat;
     ResultSet rs;
-    
+
     public Batch() {
         initComponents();
         this.getData("select * from batch_tbl ");
@@ -32,14 +32,14 @@ public class Batch extends javax.swing.JFrame {
 //            to find count of batch_tbl
 //            pat = con.prepareStatement("select count(*) from batch_tbl ");
     }
-    
+
     public void getData(String query) {
 //        tableModel.setRowCount(0);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
-            
+
             if (query == "btn") {
                 if (rs.next()) {
                     DefaultTableModel tableModel = (DefaultTableModel) batchTable.getModel();
@@ -48,18 +48,18 @@ public class Batch extends javax.swing.JFrame {
                     if (rs.getInt(1) == Integer.parseInt(String.valueOf(arr.lastElement().elementAt(0)))) {
                         return;
                     }
-                    
+
                     String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4)};
                     tableModel.addRow(tbData);
                     return;
                 }
             }
-            
+
             pat = con.prepareStatement(query);
-            
+
             rs = pat.executeQuery();
             System.out.println(rs);
-            
+
             while (rs.next()) {
                 String id = String.valueOf(rs.getInt("id"));
                 String name = rs.getString("name");
@@ -72,15 +72,15 @@ public class Batch extends javax.swing.JFrame {
 
 //                add string array data into jtable
                 tableModel.addRow(tbData);
-                
+
             }
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -235,6 +235,11 @@ public class Batch extends javax.swing.JFrame {
                 "Id", "Batch", "Batch Time", "Duration"
             }
         ));
+        batchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                batchTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(batchTable);
 
         btnAddBatch.setText("Add Batch");
@@ -305,7 +310,7 @@ public class Batch extends javax.swing.JFrame {
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnAttendanceActionPerformed
@@ -323,9 +328,10 @@ public class Batch extends javax.swing.JFrame {
 
     private void btnAddBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBatchActionPerformed
         // TODO add your handling code here:
+
         AddBatch addBatch = new AddBatch();
         addBatch.setVisible(true);
-        this.hide();
+
     }//GEN-LAST:event_btnAddBatchActionPerformed
 
     private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
@@ -337,18 +343,33 @@ public class Batch extends javax.swing.JFrame {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        DashBoard d=new DashBoard();
+        DashBoard d = new DashBoard();
         d.setVisible(true);
         this.hide();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void batchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batchTableMouseClicked
+        // TODO add your handling code here:
+
+        DefaultTableModel tblModel = (DefaultTableModel) batchTable.getModel();
+
+        // set data to text feild where row is selected
+        String table_idString = tblModel.getValueAt(batchTable.getSelectedRow(), 0).toString();
+        int row_id = Integer.parseInt(table_idString);
+
+//        passing id as parameter to ModifyBAtch form
+        ModifyBatch m = new ModifyBatch();
+        m.setBatchId(row_id);
+        m.setVisible(true);
+    }//GEN-LAST:event_batchTableMouseClicked
 
     /**
      * @param args the command line arguments

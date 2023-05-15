@@ -146,17 +146,16 @@ public class Login extends javax.swing.JFrame {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
                 pat = con.prepareStatement("select * from admin_tbl where mobile='" + userName + "' OR email='" + userName + "'");
-                System.out.println(pat);
-//                pat.setString(1, userName);
-//                pat.setString(2, password);
+
 
                 rs = pat.executeQuery();
-                System.out.println(rs);
+               
 
                 String mobile = "";
                 String email = "";
                 if (rs.next()) {
                     // A record matching the entered username was found
+                    
                     mobile = rs.getString("mobile");
                     email = rs.getString("email");
                 }
@@ -178,11 +177,7 @@ public class Login extends javax.swing.JFrame {
                     lblUserNameError.setText("Invalid Username");
                     txtName.requestFocus();
                 }
-//                } else {
-//                    // No record matching the entered username was found
-//                    lblUserNameError.setText("Invalid Username");
-//                    txtName.requestFocus();
-//                }
+
             }
         } catch (Exception e) {
             System.out.print(e);

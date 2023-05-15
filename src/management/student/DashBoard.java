@@ -32,14 +32,13 @@ public class DashBoard extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
 
 //            to find count of batch_tbl
-            pat = con.prepareStatement("select count(*) from batch_tbl ");
+            pat = con.prepareStatement("SELECT COUNT(*) FROM batch_tbl");
 
             rs = pat.executeQuery();
             System.out.println(rs);
 
             if (rs.next()) {
                 int rowCount = rs.getInt(1);
-
                 lblBatchNo.setText(String.valueOf(rowCount));
             }
 
@@ -421,44 +420,44 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeesActionPerformed
         // TODO add your handling code here:
-        Fees f=new Fees();
+        Fees f = new Fees();
         f.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnFeesActionPerformed
 
     private void btnAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttendanceActionPerformed
         // TODO add your handling code here:
-        Attendance a=new Attendance();
+        Attendance a = new Attendance();
         a.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnAttendanceActionPerformed
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
         // TODO add your handling code here:
-        Student st=new Student();
+        Student st = new Student();
         st.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnStudentActionPerformed
 
     private void btnBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatchActionPerformed
         // TODO add your handling code here:
-        
-         Batch b=new Batch();
-         b.setVisible(true);
-         this.hide();
+
+        Batch b = new Batch();
+        b.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_btnBatchActionPerformed
 
     private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
         // TODO add your handling code here:
-        Course c=new Course();
+        Course c = new Course();
         c.setVisible(true);
         this.hide();
-        
+
     }//GEN-LAST:event_btnCourseActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        Report r=new Report();
+        Report r = new Report();
         r.setVisible(true);
         this.hide();
     }//GEN-LAST:event_btnReportActionPerformed

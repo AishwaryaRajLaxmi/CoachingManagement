@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author Tanu Singh
  */
-public final class ModifyFees extends javax.swing.JFrame {
+public final class ModifyAttendance extends javax.swing.JFrame {
 
     Connection con;
     PreparedStatement pat;
     ResultSet rs;
     int fees_id;
 
-    public ModifyFees() {
+    public ModifyAttendance() {
         initComponents();
     }
 
@@ -158,7 +158,7 @@ public final class ModifyFees extends javax.swing.JFrame {
             f.setVisible(true);
 
         } catch (SQLException ex) {
-            Logger.getLogger(ModifyFees.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModifyAttendance.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -196,14 +196,18 @@ public final class ModifyFees extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyFees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyAttendance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyFees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyAttendance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyFees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyAttendance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifyFees.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyAttendance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -212,7 +216,7 @@ public final class ModifyFees extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyFees().setVisible(true);
+                new ModifyAttendance().setVisible(true);
             }
         });
     }

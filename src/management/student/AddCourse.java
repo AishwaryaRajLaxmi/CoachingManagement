@@ -136,7 +136,7 @@ public class AddCourse extends javax.swing.JFrame {
            
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Course created.....");
-            this.setVisible(false);
+            this.hide();
             Course c=new Course();
             c.setVisible(true);
 
@@ -150,8 +150,8 @@ public class AddCourse extends javax.swing.JFrame {
 
     private void CancelCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelCourseActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        AddFees a=new AddFees();
+        this.hide();
+        Course a =new Course();
         a.setVisible(true);
     }//GEN-LAST:event_CancelCourseActionPerformed
 

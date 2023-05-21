@@ -324,6 +324,7 @@ public final class ModifyStudent extends javax.swing.JFrame {
 
             int rowsAffected = pat.executeUpdate();
             JOptionPane.showMessageDialog(this, "Updation Successfull");
+            this.hide();
             Student std = new Student();
             std.setVisible(true);
 
@@ -334,13 +335,29 @@ public final class ModifyStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        this.hide();
+
+        try {
+            // TODO add your handling code here:
+            pat = con.prepareStatement("Delete from student_tbl WHERE id = ?");
+            pat.setInt(1, student_id);
+            int rowsAffected = pat.executeUpdate(); // Execute the deletion query
+            JOptionPane.showMessageDialog(this, "Deletion Successfull");
+            this.hide();
+            Student std = new Student();
+            std.setVisible(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ModifyBatch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.hide();
+        Student std = new Student();
+        std.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**

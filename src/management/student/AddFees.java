@@ -194,7 +194,7 @@ public class AddFees extends javax.swing.JFrame {
 
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "fees added.....");
-            this.setVisible(false);
+            this.hide();
             Fees b = new Fees();
             b.setVisible(true);
 
@@ -209,6 +209,8 @@ public class AddFees extends javax.swing.JFrame {
     private void cancelFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelFeesActionPerformed
         // TODO add your handling code here:
         this.hide();
+        Fees f=new Fees();
+        f.setVisible(true);
     }//GEN-LAST:event_cancelFeesActionPerformed
 
     /**

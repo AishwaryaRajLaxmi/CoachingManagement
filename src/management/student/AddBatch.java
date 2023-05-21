@@ -184,6 +184,8 @@ public class AddBatch extends javax.swing.JFrame {
     private void btnCreateBatch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateBatch1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        Batch b=new Batch();
+        b.setVisible(true);
     }//GEN-LAST:event_btnCreateBatch1ActionPerformed
 
     /**

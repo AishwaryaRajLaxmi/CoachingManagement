@@ -27,10 +27,62 @@ public class Attendance extends javax.swing.JFrame {
 
     public Attendance() {
         initComponents();
-        this.getData("select attendance_tbl.*,student_tbl.name from  attendance_tbl inner join student_tbl on student_tbl.id=attendance_tbl.id; ");
+        this.getData("select attendance_tbl.*,student_tbl.name from  attendance_tbl inner join student_tbl on student_tbl.id=attendance_tbl.student_id;");
     }
 
+//    public void getData(String query) {
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
+//
+//           
+//                if (rs.next()) {
+//                    DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
+////                    getting table as array
+//                    var arr = tableModel.getDataVector();
+//                    if (rs.getInt(1) == Integer.parseInt(String.valueOf(arr.lastElement().elementAt(0)))) {
+//                        return;
+//                    }
+//
+//                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4)};
+//                    tableModel.addRow(tbData);
+//                    return;
+//                }
+//            
+//
+//            pat = con.prepareStatement(query);
+//
+//            rs = pat.executeQuery();
+//            System.out.println(rs);
+//
+//            while (rs.next()) {
+//                String id = String.valueOf(rs.getInt("id"));
+//
+//                String Isattend = rs.getString("isattend");
+//               
+//                String date = rs.getString("a_date");
+//                String studentId = rs.getString("student_id");
+////                String name = rs.getString("name");
+//
+////                String array for store data into table
+//                String tbData[] = {id, Isattend, date, studentId};
+//                DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
+//
+////                add string array data into jtable
+//                tableModel.addRow(tbData);
+//
+//            }
+//
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
     public void getData(String query) {
+//        tableModel.setRowCount(0);
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
@@ -44,7 +96,7 @@ public class Attendance extends javax.swing.JFrame {
                         return;
                     }
 
-                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5)};
+                    String tbData[] = {String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), String.valueOf(rs.getInt(4)), rs.getString(5)};
                     tableModel.addRow(tbData);
                     return;
                 }
@@ -57,19 +109,12 @@ public class Attendance extends javax.swing.JFrame {
 
             while (rs.next()) {
                 String id = String.valueOf(rs.getInt("id"));
-
-                boolean Isattend = (rs.getBoolean("is_attend"));
-                String attend = "Present";
-                if (Isattend == true) {
-                    attend = "Absent";
-                }
-
-                String date = rs.getString("a_date");
-                String studentId = rs.getString("student_id");
+                String is_attend = rs.getString("is_attend");
+                String a_date = rs.getString("a_date");
+                String student_id = String.valueOf(rs.getInt("student_id"));
                 String name = rs.getString("name");
-
 //                String array for store data into table
-                String tbData[] = {id, attend, date, studentId, name};
+                String tbData[] = {id, is_attend, a_date, student_id,name};
                 DefaultTableModel tableModel = (DefaultTableModel) attendanceTable.getModel();
 
 //                add string array data into jtable
@@ -78,9 +123,9 @@ public class Attendance extends javax.swing.JFrame {
             }
 
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Attendance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -100,7 +145,6 @@ public class Attendance extends javax.swing.JFrame {
         btnBatch = new javax.swing.JButton();
         btnCourse = new javax.swing.JButton();
         btnAttendance = new javax.swing.JButton();
-        btnReport = new javax.swing.JButton();
         btnStudent = new javax.swing.JButton();
         btnFees = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -108,7 +152,6 @@ public class Attendance extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         attendanceTable = new javax.swing.JTable();
         bttnAttendance = new javax.swing.JButton();
-        btnSearch = new javax.swing.JTextField();
 
         jButton2.setText("jButton2");
 
@@ -146,16 +189,6 @@ public class Attendance extends javax.swing.JFrame {
         btnAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAttendanceActionPerformed(evt);
-            }
-        });
-
-        btnReport.setBackground(new java.awt.Color(51, 51, 51));
-        btnReport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnReport.setForeground(new java.awt.Color(255, 255, 255));
-        btnReport.setText("Report");
-        btnReport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReportActionPerformed(evt);
             }
         });
 
@@ -205,7 +238,6 @@ public class Attendance extends javax.swing.JFrame {
                             .addComponent(btnCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnFees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -221,15 +253,13 @@ public class Attendance extends javax.swing.JFrame {
                 .addComponent(btnBatch)
                 .addGap(18, 18, 18)
                 .addComponent(btnCourse)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(btnFees, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(btnFees, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         attendanceTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,8 +279,6 @@ public class Attendance extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setText("Search Here");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -262,8 +290,7 @@ public class Attendance extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(bttnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
         );
@@ -271,9 +298,7 @@ public class Attendance extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bttnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(bttnAttendance, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
@@ -343,17 +368,11 @@ public class Attendance extends javax.swing.JFrame {
         this.hide();
     }//GEN-LAST:event_btnCourseActionPerformed
 
-    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-        // TODO add your handling code here:
-        Report a = new Report();
-        a.setVisible(true);
-        this.hide();
-    }//GEN-LAST:event_btnReportActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DashBoard d = new DashBoard();
         d.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -428,8 +447,6 @@ public class Attendance extends javax.swing.JFrame {
     private javax.swing.JButton btnBatch;
     private javax.swing.JButton btnCourse;
     private javax.swing.JButton btnFees;
-    private javax.swing.JButton btnReport;
-    private javax.swing.JTextField btnSearch;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton bttnAttendance;
     private javax.swing.JButton jButton1;

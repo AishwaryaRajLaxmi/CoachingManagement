@@ -153,7 +153,8 @@ public final class ModifyFees extends javax.swing.JFrame {
             pat.setInt(2, fees_id);
             int rowsAffected = pat.executeUpdate();
             JOptionPane.showMessageDialog(this, "Updation Successfull");
-
+             
+            this.hide();
             Fees f = new Fees();
             f.setVisible(true);
 
@@ -171,6 +172,7 @@ public final class ModifyFees extends javax.swing.JFrame {
             int rowsAffected = pat.executeUpdate(); // Execute the deletion query
 
             JOptionPane.showMessageDialog(this, "Deletion Successfull");
+            this.hide();
             Fees f = new Fees();
             f.setVisible(true);
 

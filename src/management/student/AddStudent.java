@@ -218,6 +218,8 @@ public class AddStudent extends javax.swing.JFrame {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
         this.hide();
+        Student s=new Student();
+        s.setVisible(true);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
@@ -294,7 +296,7 @@ public class AddStudent extends javax.swing.JFrame {
 
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Student Registered.....");
-            this.setVisible(false);
+            this.hide();
             Student std=new Student();
             std.setVisible(true);
 

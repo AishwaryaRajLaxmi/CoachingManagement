@@ -176,6 +176,7 @@ public final class ModifyBatch extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBatchActionPerformed
@@ -207,7 +208,8 @@ public final class ModifyBatch extends javax.swing.JFrame {
 
             int rowsAffected = pat.executeUpdate();
             JOptionPane.showMessageDialog(this, "Updation Successfull");
-            Fees f = new Fees();
+            this.hide();
+            Batch f = new Batch();
             f.setVisible(true);
 
         } catch (SQLException ex) {
@@ -218,12 +220,14 @@ public final class ModifyBatch extends javax.swing.JFrame {
     private void DeleteBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBatchActionPerformed
         try {
             // TODO add your handling code here:
-            pat = con.prepareStatement("Delete batch_tbl WHERE id = ?");
+            pat = con.prepareStatement("Delete from batch_tbl WHERE id = ?");
             pat.setInt(1, batch_id);
             int rowsAffected = pat.executeUpdate();
             JOptionPane.showMessageDialog(this, "Deletion Successfull");
-            Fees f = new Fees();
-            f.setVisible(true);
+//            Fees f = new Fees();
+//            f.setVisible(true);
+this.setVisible(false);
+new Batch().setVisible(true);
 
         } catch (SQLException ex) {
             Logger.getLogger(ModifyBatch.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,7 +238,7 @@ public final class ModifyBatch extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.hide();
-        Fees f=new Fees();
+        Batch f=new Batch();
         f.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 

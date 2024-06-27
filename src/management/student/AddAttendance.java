@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package management.student;
 
 import java.sql.Connection;
@@ -16,10 +13,7 @@ import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-/**
- *
- * @author Tanu Singh
- */
+
 public class AddAttendance extends javax.swing.JFrame {
 
     /**
@@ -29,12 +23,9 @@ public class AddAttendance extends javax.swing.JFrame {
         initComponents();
         this.getStudentName();
 
-//        group.add(rbtnTrue);
-//        group.add(rbtnFalse);
-//        rbtnTrue.setSelected(true);
+
         System.out.print(pat);
     }
-//    ButtonGroup group = new ButtonGroup();
     Connection con;
     PreparedStatement pat;
     ResultSet rs;
@@ -181,10 +172,7 @@ public class AddAttendance extends javax.swing.JFrame {
         String date = txtDate.getText();
         String student = txtStudent.getSelectedItem().toString();
         String datayesno = cmbattendance.getSelectedItem().toString();
-//
-//        ButtonModel selectedModel = group.getSelection();
-//        JRadioButton selectedButton = (JRadioButton) selectedModel;
-//        boolean isAttend = selectedButton.isSelected();
+
         try {
 
             if (date.isEmpty() || student.isEmpty()) {
@@ -202,7 +190,6 @@ public class AddAttendance extends javax.swing.JFrame {
             pat.setString(2, date);
             pat.setString(3, student);
 
-//            System.out.println("helo" + isAttend + "" + date + "" + student);
             pat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Attendance has been taken.....");
             this.hide();
@@ -228,11 +215,7 @@ public class AddAttendance extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

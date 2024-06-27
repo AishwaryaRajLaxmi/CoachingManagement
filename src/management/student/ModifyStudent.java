@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package management.student;
 
 import java.sql.Connection;
@@ -12,10 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Tanu Singh
- */
+
 public final class ModifyStudent extends javax.swing.JFrame {
 
     Connection con;
@@ -115,7 +109,6 @@ public final class ModifyStudent extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
@@ -263,7 +256,7 @@ public final class ModifyStudent extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here
@@ -309,9 +302,7 @@ public final class ModifyStudent extends javax.swing.JFrame {
 
             }
 
-//            int feesId = Integer.parseInt(txtFees.getText());
             pat = con.prepareStatement("UPDATE student_tbl SET batch_id=?, course_id=?, name=?, mobile=?, email=?, dob=?, fathers_name=?, address=? WHERE id=?");
-//            pat.setInt(1, batchId);
             pat.setInt(1, batchId);
             pat.setInt(2, courseId);
             pat.setString(3, name);
@@ -364,11 +355,7 @@ public final class ModifyStudent extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -385,14 +372,7 @@ public final class ModifyStudent extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ModifyStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+      
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

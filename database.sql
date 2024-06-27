@@ -1,33 +1,33 @@
--- create a database
-create database coaching_management_db;
+-- Create database if not exists
+CREATE DATABASE IF NOT EXISTS coaching_management_db;
 
--- go inside databae
-use coaching_management_db;
+USE coaching_management_db;
 
--- Create a admin table
-CREATE TABLE admin_tbl (
+-- Create admin table
+CREATE TABLE IF NOT EXISTS admin_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     email VARCHAR(255),
     mobile VARCHAR(10),
     password VARCHAR(255)
 );
--- create a batch table
-CREATE TABLE batch_tbl (
+
+-- Create batch table
+CREATE TABLE IF NOT EXISTS batch_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     time TIME,
     duration VARCHAR(255)
 );
 
--- create a course table
-CREATE TABLE course_tbl (
+-- Create course table
+CREATE TABLE IF NOT EXISTS course_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255)
 );
 
--- create a student table
-CREATE TABLE student_tbl (
+-- Create student table
+CREATE TABLE IF NOT EXISTS student_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     batch_id INT,
     course_id INT,
@@ -40,8 +40,9 @@ CREATE TABLE student_tbl (
     FOREIGN KEY (batch_id) REFERENCES batch_tbl(id),
     FOREIGN KEY (course_id) REFERENCES course_tbl(id)
 );
--- attendace
-CREATE TABLE attendance_tbl (
+
+-- Create attendance table
+CREATE TABLE IF NOT EXISTS attendance_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     is_attend BOOLEAN,
     a_date DATE,
@@ -49,8 +50,8 @@ CREATE TABLE attendance_tbl (
     FOREIGN KEY (student_id) REFERENCES student_tbl(id)
 );
 
--- fees
-CREATE TABLE fees_tbl (
+-- Create fees table
+CREATE TABLE IF NOT EXISTS fees_tbl (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fees INT,
     student_id INT,

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package management.student;
 
 import java.sql.Connection;
@@ -13,10 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Tanu Singh
- */
+
 public class AddBatch extends javax.swing.JFrame {
 
     /**
@@ -158,9 +152,7 @@ public class AddBatch extends javax.swing.JFrame {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/coaching_management_db", "root", "Tanu@123");
-            //            pat = con.prepareStatement("select * from admin_tbl where mobile='" + userName + "' OR email='" + userName + "'");
             pat = con.prepareStatement("insert into batch_tbl (name,time,duration) values(?,?,?)");
-            //            rs = pat.executeQuery();
             System.out.print(pat);
 
 //             The setString method is used to set the value of a parameter in a prepared statement when the parameter is a string data type
@@ -192,11 +184,7 @@ public class AddBatch extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

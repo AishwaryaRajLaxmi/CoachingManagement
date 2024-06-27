@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package management.student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-/**
- *
- * @author Tanu Singh
- */
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +24,6 @@ public class Student extends javax.swing.JFrame {
     
   
     public void getData(String query) {
-//        tableModel.setRowCount(0);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -54,7 +46,6 @@ public class Student extends javax.swing.JFrame {
                 String batch_name = rs.getString("batch_tbl.name");
                 String course = rs.getString("course_tbl.name");
 
-//                String array for store data into table
                 String tbData[] = {id,name,email,mobile,dob,fathersname,address,batch_name,course};
                 DefaultTableModel tableModel = (DefaultTableModel)tblStudent.getModel();
 
@@ -72,7 +63,6 @@ public class Student extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
@@ -342,22 +332,7 @@ public class Student extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Student.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+       
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
